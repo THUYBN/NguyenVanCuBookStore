@@ -1,0 +1,67 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.PagedList<S3Train.Domain.CT_KhuyenMai>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/KM.cshtml";
+}
+
+<h2>Danh sách sản phẩm thuộc chương trình khuyến mãi</h2>
+
+
+<div class="col-xl-12 col-lg-7 mb-4">
+    <table class="table table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <th>
+                    Tên chương trình
+                </th>
+                <th>
+                    Tên sản phẩm
+                </th>
+                <th>
+                    Số lượng
+                </th>
+                <th>
+                    Phần trăm KM
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KhuyenMai.TenKM)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SanPham.TenSP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoLuong)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhanTramKM)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", "CT_KhuyenMai", new { id = item.Id })" class="btn btn-warning btn-sm"><i class="fas fa-pen" aria-hidden="true"></i></a>
+                    <a href="@Url.Action("Delete", "CT_KhuyenMai", new { id = item.Id })" class="btn btn-danger btn-sm"><i class="fas fa-trash" aria-hidden="true"></i></a>
+
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+@*Create page link*@
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    <div class="MenuPage">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+    </div>
+    <style>
+        .MenuPage li {
+            display: inline;
+        }
+    </style>

@@ -1,0 +1,60 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.PagedList<S3Train.Domain.NhaSanXuat>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/SP.cshtml";
+}
+
+<h2>Danh sách Nhà sản xuất/xuất bản</h2>
+
+<p class="btn btn-success mb-1">
+    @Html.ActionLink("Thêm mới Nhà sản xuất", "Create")
+</p>
+<br />
+<br />
+
+<div class="col-xl-12 col-lg-7 mb-4">
+    <table class="table table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <th>
+                    Tên
+                </th>
+                <th>
+                    Thông tin thêm
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenNSX)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ThongTinThem)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", "NhaSanXuats", new { id = item.Id })" class="btn btn-warning btn-sm"><i class="fas fa-pen" aria-hidden="true"></i></a>
+                    <a href="@Url.Action("Delete", "NhaSanXuats", new { id = item.Id })" class="btn btn-danger btn-sm"><i class="fas fa-trash" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+@*Create page link*@
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    <div class="MenuPage">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+    </div>
+    <style>
+        .MenuPage li {
+            display: inline;
+        }
+    </style>

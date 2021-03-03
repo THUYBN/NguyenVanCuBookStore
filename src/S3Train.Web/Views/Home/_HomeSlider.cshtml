@@ -1,0 +1,55 @@
+﻿@using S3Train.Web.Models;
+@model IList<SliderItemViewModel>
+
+
+<div class="container">
+    <div class="shoes-grid">
+        <a href="#">
+            <div class="wrap-in">
+               
+                <div class="wmuSlider example1 slide-grid">
+                    @{
+                        foreach (var item in Model)
+                        {
+                            
+                            <div class="wmuSliderWrapper">
+
+                                <article style="position:unset; width: 100%; height: 100% ; opacity: 0;">
+                                    
+                                    <div class="banner-matter">
+                                        <img class="img-responsive " src="@Url.Content("~/ImagePD/"+@item.ImagePath)" width="8000" height="10000" alt=" " />
+                                        @*<a href="#">
+                                            <div class="col-md-5 banner-bag">
+                                                <img class="img-responsive " src="@Url.Content("~/ImagePD/"+@item.ImagePath)" width="8000" height="5000" alt=" " />
+                                            </div>
+                                            <div class="col-md-7 banner-off">
+                                                <h5>@item.Title</h5>
+                                                <p>@item.Description </p>
+                                                <span class="on-get">@item.EventUrl</span>
+                                            </div>
+
+                                            <div class="clearfix"> </div>
+                                        </a>*@
+                                    </div>
+
+                                </article>
+
+                            </div>
+                        }
+                    }
+                    </div>
+                </div>
+</a>
+        @*<ul class="wmuSliderPagination">
+            <li><a href="#" class="">0</a></li>
+            <li><a href="#" class="">1</a></li>
+            <li><a href="#" class="">2</a></li>
+            <li><a href="#" class="">3</a></li>
+            <li><a href="#" class="">4</a></li>
+        </ul>*@
+        <script src="~/Content/js/jquery.wmuSlider.js"></script>
+        <script>
+            $('.example1').wmuSlider();
+        </script>
+    </div>
+</div>

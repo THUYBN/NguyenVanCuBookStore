@@ -1,0 +1,88 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @*<ul class="account">
+                <li>
+                    @Html.ActionLink(User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                </li>
+                <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+            </ul>*@
+        @*<div class="nav-no-collapse header-nav">
+            <ul class="nav pull-right">
+                <li class="dropdown">
+                    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="halflings-icon white user"></i>&nbsp;Session["Email"]
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-menu-title">
+                            <span>Account Settings</span>
+                        </li>
+                        <li>Html.ActionLink("Logout", "Logout", "Login")</li>
+                    </ul>
+                </li>
+                 end: User Dropdown 
+            </ul>
+        </div>*@
+        <div class="header-bottom-right">
+            <div class="account">
+                <div class="nav-no-collapse header-nav">
+                    <ul class="nav pull-right">
+                        <li class="dropdown">
+                            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                                <span> </span>@User.Identity.GetUserName()<img src="~/Content/images/b-arrow.png" />
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Tài khoản", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                                <li><a href="javascript:document.getElementById('logoutForm').submit()">Đăng xuất</a>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="cart"><a href="@Url.Action("MyCart", "Cart", null)" ><span> </span>Giỏ hàng</a></div>
+        </div>
+    }
+}
+else
+{
+    <div class="header-bottom-right">
+        <div class="account">
+            <a href="#" data-toggle="modal" data-target="#exampleModal"><span> </span>Tài khoản của tôi</a>
+        </div>
+        <div id='loginForm'>
+        </div>
+        
+        <div>
+            <div id='registerForm'>
+            </div>
+            <ul class="login">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#exampleModal"><span> </span>Đăng nhập</a>
+
+                </li> |
+                <li><a href="#" data-toggle="modal" data-target="#exampleModal2">Đăng kí</a></li>
+            </ul>
+        </div>
+        <div class="cart"><a href="@Url.Action("MyCart", "Cart", null)"><span> </span>Giỏ hàng</a></div>
+        <div class="clearfix"> </div>
+    </div>
+
+}
+
+    <style>
+        .login {
+            float: left;
+            margin-top: -40px;
+            margin-right: 50px;
+        }
+        .cart {
+            float: left;
+            margin-top: -40px;
+            margin-right: 30px;
+        }
+    </style>

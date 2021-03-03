@@ -1,0 +1,21 @@
+﻿@model S3Train.Domain.CT_KhuyenMai
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/KM.cshtml";
+}
+
+<h3 style="color:red">Bạn có chắc muốn xóa sản phẩm @Model.SanPham.TenSP khỏi chương trình?</h3>
+<div>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger mb-1" /> |
+            @Html.ActionLink("Quay lại", "Index")
+        </div>
+    }
+</div>

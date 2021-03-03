@@ -1,0 +1,27 @@
+﻿
+@using S3Train.Web.Models;
+@model IList<CategoryViewModel>
+
+
+<ul>
+    <li class='home'><span class='close-menu' style='font-size:26px;font-weight:400;position:relative' title='Close'>&#8801; <span style='font-size:18px;font-weight:700;position:absolute;top:17px;left:33px'>Categories</span></span></li>
+    @foreach (var item in Model)
+    {
+        <li><a href="@Url.Action("ProductsByCategory", "Category",new { @CategoryId = item.Id} )" title='Home'><span>@item.NameCategory</span></a></li>
+    }
+</ul>
+
+<script type="text/javascript">
+$(function () {
+    $('.menu').click(function () {
+        $('#css-menu').css({
+           left:'0'
+        });
+    });
+    $('.close-menu').click(function () {
+        $('#css-menu').css({
+            left: '-340px'
+        });
+    });
+    });
+</script>

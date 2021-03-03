@@ -1,0 +1,78 @@
+﻿@using S3Train.Web.Models;
+@using Microsoft.AspNet.Identity;
+@model HomeViewModel
+@{
+    ViewBag.Title = "Purchase";
+    Layout = "~/Views/Shared/_Profile.cshtml";
+    var ApplicationUserId = User.Identity.GetUserId();
+}
+
+@if (Model.OrderProViewModel == null || Model.OrderProViewModel.Count == 0)
+{
+<div class="cart-empty">
+    <p>Chưa có đơn hàng nào</p>
+    <a class="continue" href="@Url.Action("Index", "Home", null)">Mua ngay</a>
+</div>
+}
+else
+{
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.OrderProViewModel.First().Id)
+        @Html.HiddenFor(model => model.OrderProViewModel.First().DatePayment)
+        @Html.HiddenFor(model => model.OrderProViewModel.First().Note)
+        @Html.HiddenFor(model => model.OrderProViewModel.First().TotalMoney)
+        @Html.HiddenFor(model => model.OrderProViewModel.First().CreatedDate)
+        @Html.HiddenFor(model => model.OrderProViewModel.First().UpdatedDate)
+        @Html.HiddenFor(model => model.OrderProViewModel.First().IsActive)
+        foreach (var item in Model.OrderProViewModel)
+        {
+        <div class="cart-header">
+            <div class="cart-sec">
+
+                <divError executing child request class="cart-item cyc">
+                    <img src="@Url.Content("~/ImagePD/" + item.ImagePath)" width="80" height="100" />
+                </divError>
+                <div class="cart-item-info">
+                    <ul>
+                        <li>@item.NameProduct</li>
+                        <li class="price">@item.Price x @item.OrderQuantity</li>
+                    </ul>
+                </div>
+                <div class="total">
+                    <p> Thành tiền: @item.Total</p>
+                    <p><a id="btn-add-to-cart" style="float:right; background-color:coral; color:white" href="@Url.Action("Detail", "Product", new { @id = item.ProductId })" class="btn btn-default" role="button">Mua lại</a></p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        }
+
+    <div class="total">
+    @if (Model.OrderProViewModel.First().Status != "Hủy" && Model.OrderProViewModel.First().Status != "Đang vận chuyển")
+    {
+        <input type="submit" style="float:right; background-color:black; color:white" class="btn btn-default" value="Hủy" />
+    }</div>
+    <br />
+    }
+}
+<style>
+    .total{
+        float: right
+    }
+    .price
+    {
+        float:right
+    }
+    nav ul.pagination {
+        float: right;
+    }
+    .sta {
+        margin-left: -800px;
+    }
+</style>
+
+
+
+

@@ -1,0 +1,99 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.PagedList<S3Train.Domain.SanPham>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/SP.cshtml";
+}
+
+<h2>Danh mục Văn phòng phẩm</h2>
+
+<p class="btn btn-success mb-1">
+    @Html.ActionLink("Thêm mới văn phòng phẩm", "Create")
+</p>
+<br />
+<br />
+@using (Html.BeginForm("Index", "SanPhams1", FormMethod.Get))
+{
+    @Html.TextBox("search")
+    <input type="submit" style="color:white" value="Tìm Kiếm">
+}
+<br />
+@using (Html.BeginForm("Index", "SanPhams1", FormMethod.Get))
+{
+    <div class="col-xl-12 col-lg-7 mb-4">
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>
+                        Hình ảnh
+                    </th>
+                    <th>
+                        Tên sản phẩm
+                    </th>
+                    <th>
+                        Màu sắc
+                    </th>
+                    <th>
+                        Tác giả
+                    </th>
+                    <th>
+                        Nhà sản xuất
+                    </th>
+                    <th>
+                        Gía
+                    </th>
+                    <th>
+                        Loại sản phẩm
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="@Url.Content("~/ImagePD/" + item.HinhAnh)" width="50" height="50" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenSP)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MauSac)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TacGia)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NhaSanXuat.TenNSX)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Gia)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LoaiSanPham.TenLoai)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Edit", "SanPhams1", new { id = item.Id })" class="btn btn-warning btn-sm"><i class="fas fa-pen" aria-hidden="true"></i></a>
+                        @*<a href="@Url.Action("Details", "SanPhams", new { id = item.Id })" class="btn btn-info btn-sm"><i class="fas fa-info-circle" aria-hidden="true"></i></a>*@
+                        <a href="@Url.Action("Delete", "SanPhams1", new { id = item.Id })" class="btn btn-danger btn-sm"><i class="fas fa-trash" aria-hidden="true"></i></a>
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+}
+    @*Create page link*@
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    <div class="MenuPage">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+    </div>
+    <style>
+        .MenuPage li {
+            display: inline;
+        }
+    </style>

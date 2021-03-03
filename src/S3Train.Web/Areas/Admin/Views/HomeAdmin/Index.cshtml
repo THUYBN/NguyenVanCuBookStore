@@ -1,0 +1,269 @@
+﻿@model S3Train.Domain.NhanVien
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="~/Areas/Admin/Content/img/logo/icon.jpg" rel="icon">
+    <title>Nhà sách Nguyễn Văn Cừ</title>
+    <link href="~/Areas/Admin/Content/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Areas/Admin/Content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Areas/Admin/Content/css/ruang-admin.min.css" rel="stylesheet">
+</head>
+<p>
+    <img src="~/Content/images/loga.jpg" width="100%" height="200" style="text-align:center " /><br />
+</p>
+
+
+<span style="text-align:center">Xin chào @Session["tendn"]</span>
+<a class="dropdown-item" href="@Url.Action("Logout","Login")">
+    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Đăng xuất
+</a>
+
+<div class="row mb-3">
+    @if (Model.NhomNguoiDung.TenNhom == "Mod")
+    {
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-light font-weight-bold text-uppercase mb-1"><a href="@Url.Action("Index", "ApplicationUsers")">Quản lý khách hàng</a></div>
+                            <div class="h-100 mb-0 font-weight-bold text-gray-800">Xem thông tin khách hàng</div>
+
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Earnings (Annual) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-light font-weight-bold text-uppercase mb-1"><a href="@Url.Action("Index", "HoaDons")">Quản lý đơn đặt hàng</a></div>
+                            <div class="h-100 mb-0 font-weight-bold text-gray-800">Kiểm tra danh sách, Cập nhật trang thái đơn hàng</div>
+
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-shopping-cart fa-2x text-success"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-light font-weight-bold text-uppercase mb-1"><a href="@Url.Action("Index", "SanPhams")">Quản lý sản phẩm</a></div>
+                            <div class="h-100 mb-0 font-weight-bold text-gray-800">Danh mục sản phẩm, nhà cung cấp, nhà sản xuất, loại sản phẩm, thêm, xóa sửa thông tin liên quan</div>
+
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-light font-weight-bold text-uppercase mb-1"><a href="@Url.Action("Index", "KhuyenMais")">Quản lý khuyến mãi</a></div>
+                            <div class="h-100 mb-0 font-weight-bold text-gray-800">Danh sách chương trình khuyến mãi, thêm, xóa sửa thông tin liên quan</div>
+
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-light font-weight-bold text-uppercase mb-1"><a href="@Url.Action("Index", "ThongKe")">Thống kê</a></div>
+                            <div class="h-100 mb-0 font-weight-bold text-gray-800">Thống kê doanh thu</div>
+
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <!-- New User Card Example -->
+
+    }
+    else if (Model.NhomNguoiDung.TenNhom == "Admin")
+    {
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-light font-weight-bold text-uppercase mb-1"><a href="@Url.Action("Index", "ApplicationUsers")">Quản lý khách hàng</a></div>
+                            <div class="h-100 mb-0 font-weight-bold text-gray-800">Xem thông tin khách hàng</div>
+
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Earnings (Annual) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-light font-weight-bold text-uppercase mb-1"><a href="@Url.Action("Index", "HoaDons")">Quản lý đơn đặt hàng</a></div>
+                            <div class="h-100 mb-0 font-weight-bold text-gray-800">Kiểm tra danh sách, Cập nhật trang thái đơn hàng</div>
+
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-shopping-cart fa-2x text-success"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-light font-weight-bold text-uppercase mb-1"><a href="@Url.Action("Index", "SanPhams")">Quản lý sản phẩm</a></div>
+                            <div class="h-100 mb-0 font-weight-bold text-gray-800">Danh mục sản phẩm, nhà cung cấp, nhà sản xuất, loại sản phẩm, thêm, xóa sửa thông tin liên quan</div>
+
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-light font-weight-bold text-uppercase mb-1"><a href="@Url.Action("Index", "KhuyenMais")">Quản lý khuyến mãi</a></div>
+                            <div class="h-100 mb-0 font-weight-bold text-gray-800">Danh sách chương trình khuyến mãi, thêm, xóa sửa thông tin liên quan</div>
+
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-light font-weight-bold text-uppercase mb-1"><a href="@Url.Action("Index", "NhanViens")">Quản lý nhân viên</a></div>
+                            <div class="h-100 mb-0 font-weight-bold text-gray-800">Danh sách nhân viên, thêm, xóa, sửa thông tin nhân viên</div>
+
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-light font-weight-bold text-uppercase mb-1"><a href="@Url.Action("Index", "ThongKe")">Thống kê</a></div>
+                            <div class="h-100 mb-0 font-weight-bold text-gray-800">Thống kê doanh thu</div>
+
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    else
+    {
+
+        <!-- Earnings (Annual) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-light font-weight-bold text-uppercase mb-1"><a href="@Url.Action("Index", "HoaDons")">Quản lý đơn đặt hàng</a></div>
+                            <div class="h-100 mb-0 font-weight-bold text-gray-800">Kiểm tra danh sách, Cập nhật trang thái đơn hàng</div>
+
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-shopping-cart fa-2x text-success"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-light font-weight-bold text-uppercase mb-1"><a href="@Url.Action("Index", "ThongKe")">Thống kê</a></div>
+                            <div class="h-100 mb-0 font-weight-bold text-gray-800">Thống kê doanh thu</div>
+
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>

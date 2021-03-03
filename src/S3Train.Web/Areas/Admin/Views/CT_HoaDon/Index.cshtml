@@ -1,0 +1,65 @@
+﻿@model IEnumerable<S3Train.Domain.CT_HoaDon>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/DH.cshtml";
+}
+<div class="col-xl-12 col-lg-7 mb-4">
+    <div class="card mb-3" id="hoadon">
+        <h2>Chi tiết đơn hàng</h2>
+
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>
+                        Mã đơn hàng
+                    </th>
+                    <th>
+                        Sản phẩm
+                    </th>
+                    <th>
+                        Số lượng
+                    </th>
+                    <th>
+                        Gía
+                    </th>
+                    <th>
+                        Thành tiền
+                    </th>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaHD)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SanPham.TenSP)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SoLuong)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Gia)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ThanhTien)
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+<input type="submit" value="In hóa đơn" class="btn btn-info btn-lg" onclick="printDiv('hoadon')" />
+<script language="javascript" type="text/javascript">
+    function printDiv(divID) {
+                var divElements = document.getElementById(divID).innerHTML;
+                var oldPage = document.body.innerHTML;
+                document.body.innerHTML =
+                    "<html><head><title></title></head><body>" +
+                    divElements + "</body>";
+                window.print();
+                document.body.innerHTML = oldPage;
+            }</script>

@@ -1,0 +1,293 @@
+﻿@using S3Train.Web.Models;
+@model ProductDetailViewModel
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<div class="product-main">
+    <div class="container">
+        <div class="ctnt-bar cntnt">
+            <div class="content-bar">
+                <div class="single-page">
+                    <div class="details-left-slider">
+                        <ul id="etalage">
+                            <li>
+                                <a href="#">
+                                    <img class="etalage_thumb_image" src="@Url.Content("~/ImagePD/" + Model.ImagePath)" width="250" height="350" />
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    @if (Model.PromotionPercent > 0)
+                    {
+                        <div class="details-left-info">
+                            <h3>@Model.Name</h3>
+                            <p>
+                                @(Convert.ToDouble(Model.Price) - (Convert.ToDouble(Model.Price) * Model.PromotionPercent / 100))
+                                <span>Save: @(Convert.ToDouble(Model.Price) - (Convert.ToDouble(Model.Price) - (Convert.ToDouble(Model.Price) * Model.PromotionPercent / 100))) (-@Model.PromotionPercent%)</span>
+                            </p>
+                            <h5><strike>@Model.DisplayPrice</strike></h5>
+                            <p class="qty">Số lượng :</p>
+                            <input min="1" max="@Model.Amount" type="number" id="quantity" name="quantity" value="1" class="form-control input-small quantity">
+                            <input class="amount" value="@Model.Amount" type="hidden" />
+                            <div class="btn_form">
+                                <a id="btn-add-to-cart" onclick="myFunction()" href="#">Thêm vào giỏ hàng</a>
+                            </div>
+                            <div class="flower-type">
+                                <p>Tác giả  :@Model.AuthorName</p>
+                            </div>
+                            <h5>Mô tả  :</h5>
+                            <p class="desc">@Model.Summary</p>
+                        </div>
+                    }
+                    else
+                    {
+                        if (Model.UpdatedDate == null)
+                        {
+                            <div class="details-left-info">
+                                <h3>@Model.Name</h3>
+                                <p> @Model.DisplayPrice</p>
+                                <div class="flower-type">
+                                    <p>Tác giả  :@Model.AuthorName</p>
+                                </div>
+                                <p>Tóm tắt  :</p>
+                                <p class="desc">@Model.Summary</p>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="details-left-info">
+                                <h3>@Model.Name</h3>
+
+                                <p> @Model.DisplayPrice</p>
+                                <p class="qty">Số lượng :</p><input min="1" max="@Model.Amount" type="number" id="quantity" name="quantity" value="1" class="form-control input-small quantity">
+                                <input class="amount" value="@Model.Amount" type="hidden" />
+                                <div class="btn_form">
+                                    <a id="btn-add-to-cart" onclick="myFunction()" href="#">Thêm vào giỏ hàng</a>
+                                    <div id="snackbar">Add to cart successfully</div>
+                                </div>
+                                <div class="flower-type">
+                                    <p>Tác giả  :@Model.AuthorName</p>
+                                </div>
+                                <p>Tóm tắt :</p>
+                                <p class="desc">@Model.Summary</p>
+                            </div>
+                        }
+
+                    }
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="product_desc">
+            <div id="horizontalTab">
+                <ul class="resp-tabs-list">
+                    <li>Chi tiết sản phẩm</li>
+                    @if (Model.UpdatedDate == null)
+                    {
+
+                    }
+
+                    @*<div class="clear"></div>*@
+                </ul>
+                <div class="resp-tabs-container">
+                    <div class="product-specifications">
+                        <table class="table table-bordered">
+                            <tbody>
+                                @if (Model.TenPhanLoai == "Sách")
+                                {
+                                    <tr>
+                                        <td>Tác giả</td>
+                                        <td>@Model.AuthorName</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nhà xuất bản</td>
+                                        <td>@Model.NamePublisher</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ngôn ngữ</td>
+                                        <td>@Model.NgonNgu</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Trọng lượng</td>
+                                        <td>@Model.TrongLuong g</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Số trang</td>
+                                        <td>@Model.SoTrang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Hình thức</td>
+                                        <td>@Model.ChatLuong</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kích thước</td>
+                                        <td>@Model.KichThuoc</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nhà cung cấp</td>
+                                        <td>@Model.NCC</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Loại sách</td>
+                                        <td><a href="#">@Model.CategoryName</a></td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td>Tác giả</td>
+                                        <td>@Model.AuthorName</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nhà sản xuất</td>
+                                        <td>@Model.NamePublisher</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Trọng lượng</td>
+                                        <td>@Model.TrongLuong g</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Màu sắc</td>
+                                        <td>@Model.MauSac</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Chất liệu</td>
+                                        <td>@Model.ChatLuong</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nhà cung cấp</td>
+                                        <td>@Model.NCC</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Loại sản phẩm</td>
+                                        <td><a href="#">@Model.CategoryName</a></td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    @if (Model.UpdatedDate == null)
+                    {
+                    }
+                    else
+                    {
+                    <div class="review">
+                        <h4>Lorem ipsum Review by <a href="#">Finibus Bonorum</a></h4>
+                        <ul>
+                            <li>Price : <div class="rating-stars"><div class="rating" data-rating-max="5"> </div> </div></li>
+                            <li>Value : <div class="rating-stars"><div class="rating" data-rating-max="5"> </div> </div></li>
+                            <li>Quality : <div class="rating-stars"><div class="rating" data-rating-max="5"> </div> </div></li>
+                        </ul>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                        <div class="your-review">
+                            <h4>How Do You Rate This Product?</h4>
+                            <p>Write Your Own Review?</p>
+                            <form>
+                                <div>
+                                    <span><label>Nickname<span class="red">*</span></label></span>
+                                    <span><input type="text" value=""></span>
+                                </div>
+                                <div>
+                                    <span><label>Summary of Your Review<span class="red">*</span></label></span>
+                                    <span><input type="text" value=""></span>
+                                </div>
+                                <div>
+                                    <span><label>Review<span class="red">*</span></label></span>
+                                    <span><textarea> </textarea></span>
+                                </div>
+                                <div>
+                                    <span><input type="submit" value="SUBMIT REVIEW"></span>
+                                </div>
+                            </form>
+                        </div>
+                        <script type="text/javascript">
+                            /* place inside document ready function */
+                            $(".rating").starRating({
+                                minus: true // step minus button
+                            });
+                        </script>
+                    </div>
+                    }
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="shop">
+        <div class="container">
+            <div class="roses-head">
+                <h4>Sản phẩm liên quan</h4>
+            </div>
+        </div>
+    </div>
+    <!---->
+    <div class="container">
+        <div id="myCarousel" class="carousel slide">
+            @foreach (var item in Model.RelatedProduct)
+            {
+
+                <div class="col-md-3">
+                    <div class="thumbnail">
+
+                        <a href="@Url.Action("Detail", "Product", new { @id = item.Id })">
+                            <img src="@Url.Content("~/ImagePD/" + item.ImagePath)" />
+                        </a>
+                        <div class="caption">
+                            <a href="@Url.Action("Detail", "Product", new { @id = item.Id })"><h5>@item.NameProduct</h5></a>
+                            <p><a class="btn btn-primary" role="button">@item.DisplayPrice</a><a style="float:right"  class="btn btn-default" role="button" onclick="myFunction()">Thêm vào giỏ hàng</a></p>
+                            <div id="snackbar">Add to cart successfully</div>
+                        </div>
+
+                    </div>
+                    <br />
+                    <br />
+                    <br />
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+  
+    $(document).ready(function () {
+        $('#btn-add-to-cart').click(function () {
+            var id = "@Model.Id";
+            var quantity = $('#quantity').val();
+                $.ajax({
+            type: "POST",
+            url: '/Cart/AddItems',
+            data: { Id: id, Quantity: quantity },
+            success: function (data) {
+            }
+        });
+    });
+
+    $(".quantity").change(function () {
+        var quantityVal = parseInt($(".quantity").val());
+        var amountVal = parseInt($(".amount").val());
+        if (quantityVal >= amountVal) {
+            alert("The quantity is not enough");
+            $(".quantity").val(amountVal);
+        }
+    });
+    });
+    function myFunction() {
+        // Get the snackbar DIV
+        var x = document.getElementById("snackbar");
+        // Add the "show" class to DIV
+        x.className = "show";
+        // After 3 seconds, remove the show class from DIV
+        setTimeout(function () { x.className = x.className.replace("show", ""); }, 5000);
+    }
+</script>

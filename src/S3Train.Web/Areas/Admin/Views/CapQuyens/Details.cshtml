@@ -1,0 +1,35 @@
+﻿@model S3Train.Domain.CapQuyen
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CapQuyen</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ChucNang.TenCN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChucNang.TenCN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NhomNguoiDung.TenNhom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NhomNguoiDung.TenNhom)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

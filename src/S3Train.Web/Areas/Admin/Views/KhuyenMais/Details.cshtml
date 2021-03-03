@@ -1,0 +1,43 @@
+﻿@model S3Train.Domain.KhuyenMai
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/KM.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>KhuyenMai</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenKM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenKM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ThoiGianBD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThoiGianBD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ThoiGianKT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThoiGianKT)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

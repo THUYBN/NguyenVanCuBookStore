@@ -1,0 +1,108 @@
+﻿@using S3Train.Web.Models;
+@model HomeViewModel
+@{
+    ViewBag.Title = "ProductsSearchForAuthor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("ProductsSearchForAuthor", "ProductsSearchForName", FormMethod.Get))
+{
+    <div class="shop">
+        <div class="container">
+            <div class="roses-head">
+                <h2 style="color:orangered">Kết quả tìm kiếm của "@Html.Value("Name")"</h2>
+            </div>
+        </div>
+    </div>
+    <!---->
+    <div class="container">
+        <div id="myCarousel" class="carousel slide">
+            @foreach (var item in Model.productsSearchForName)
+            {
+
+                <div class="col-md-3">
+                    <div class="thumbnail">
+
+                        <a href="@Url.Action("Detail", "Product", new { @id = item.Id })">
+                            <img src="@Url.Content("~/ImagePD/" + item.ImagePath)" />
+                        </a>
+                       @if (item.UpdatedDate == null)
+                        {
+                            <div class="caption">
+                                <a href="@Url.Action("Detail", "Product", new { @id = item.Id })"><h5>@item.NameProduct</h5></a>
+                                <p>
+                                    <a class="btn btn-primary" role="button">@item.DisplayPrice</a>
+                                    <a id="btn-add-to-cart" style="float:right" href="@Url.Action("Detail", "Product", new { @id = item.Id })" class="btn btn-default" role="button">Xem trước</a>
+                                </p>
+                            </div>
+                           }
+                           else
+                           {
+                            <div class="caption">
+                                <a href="@Url.Action("Detail", "Product", new { @id = item.Id })"><h5>@item.NameProduct</h5></a>
+                                <p>
+                                    <a class="btn btn-primary" role="button">@item.DisplayPrice</a><a id="btn-add-to-cart" data-id="@item.Id" style="float:right" href="#" class="btn btn-default" role="button">Thêm vào giỏ hàng</a>
+                                </p>
+                            </div>
+                           }
+                    </div>
+                    <br />
+                    <br />
+                </div>
+
+            }
+            <div class="clearfix"></div>
+            <!------Page List-------->
+            @if (ViewBag.TotalPage > 1)
+            {
+                var pageDisplay = (int)ViewBag.MaxPage;
+                int totalPage = (int)ViewBag.TotalPage;
+                int curentPage = ((int)ViewBag.Page);
+
+                var startPageIndex = Math.Max(curentPage, curentPage - pageDisplay / 2);
+                var endPageIndex = Math.Min(totalPage, curentPage + pageDisplay / 2);
+                var link = Url.Action("ProductsSearchForAuthor", "ProductsSearchForName", new { @Name = Html.Value("Name") });
+                <nav>
+                    <ul class="pagination">
+                        @if (curentPage > ViewBag.First)
+                        {
+                            <li><a href="@link&page=@ViewBag.First" title="First page"><i class="fa fa-angle-double-left"></i></a></li>
+                            <li><a href="@link&page=@ViewBag.Pre" title="Previous page"><i class="fa fa-angle-left"></i></a></li>
+                        }
+                        @for (int i = startPageIndex; i <= endPageIndex; i++)
+                        {
+                        if (curentPage == i)
+                        {
+                                <li><a href="@link&page=@i" class="active" title="Page @i">@i</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="@link&page=@i" class="pos" title="Page @i">@i</a></li>
+                            }
+                        }
+                        @if (curentPage < totalPage)
+                        {
+                            <li><a href="@link&page=@ViewBag.Next" title="Next page"><i class="fa fa-angle-right"></i></a></li>
+                            <li><a href="@link&page=@ViewBag.Last" title="Last page"><i class="fa fa-angle-double-right"></i></a></li>
+                        }
+                    </ul>
+                </nav>
+            }
+            else
+            {
+                <nav>
+                    <ul class="pagination">
+                        <li><a href=" @Url.Action("ProductsSearchForAuthor", "ProductsSearchForName", new { @Name = Html.Value("Name") })&page=1" class="active" title="Page 1">1</a></li>
+                    </ul>
+                </nav>
+            }
+        </div>
+
+    </div>
+}
+
+<style>
+    nav ul.pagination {
+        float: right;
+    }
+</style>

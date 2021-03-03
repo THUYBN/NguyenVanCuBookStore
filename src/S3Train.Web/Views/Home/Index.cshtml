@@ -1,0 +1,121 @@
+﻿@using S3Train.Web.Models;
+@model HomeViewModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<div class="container">
+
+    @{
+        Html.RenderPartial("_HomeSlider", Model.SliderItems);
+    }
+    <div class="product">
+
+        <!-- Sách mới -->
+        <div class="products">
+            <h5 class="latest-product">SÁCH MỚI</h5>
+            <a class="view-all" href="@Url.Action("NewProducts", "ListOfProducts", null)">XEM THÊM<span></span></a>
+        </div>
+        <div class="clearfix"> </div>
+        <div class="container">
+            <div class="row">
+                <div class="well">
+                    <!-- Carousel ================================================== -->
+                    <div id="myCarousel" class="carousel slide">
+                        @Html.Partial("_NewProduct", Model.NewProducts)
+                        <a class="left carousel-control" href="#myCarousel" data-slide="prev"><i class="fa fa-chevron-left fa-2x"></i></a>
+                        <a class="right carousel-control" href="#myCarousel" data-slide="next"><i class="fa fa-chevron-right fa-2x"></i></a>
+
+                    </div><!-- End Carousel -->
+                </div><!-- End Well -->
+            </div>
+        </div>
+
+        <!-- Sách sắp về -->
+        <div class="products">
+            <h5 class="latest-product">SÁCH SẮP VỀ</h5>
+            <a class="view-all" href="@Url.Action("cSProducts", "ListOfProducts", null)">XEM THÊM<span> </span></a>
+        </div>
+        <div class="clearfix"> </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="well">
+                    <!-- Carousel================================================== -->
+                    <div id="myCarousel1" class="carousel slide">
+                        @Html.Partial("_CSProduct", Model.CSProducts)
+                        <a class="left carousel-control" href="#myCarousel1" data-slide="prev"><i class="fa fa-chevron-left fa-2x"></i></a>
+                        <a class="right carousel-control" href="#myCarousel1" data-slide="next"><i class="fa fa-chevron-right fa-2x"></i></a>
+
+                    </div><!-- End Carousel -->
+                </div><!-- End Well -->
+            </div>
+        </div>
+        <div class="clearfix"> </div>
+
+        <!-- Sách bán chạy -->
+        <div class="products">
+            <h5 class="latest-product">SẢN PHẨM BÁN CHẠY</h5>
+            <a class="view-all" href="@Url.Action("bestSellerProducts", "ListOfProducts", null)">XEM THÊM<span> </span></a>
+        </div>
+        <div class="clearfix"> </div>
+        <div class="container">
+            <div class="row">
+                <div class="well">
+                    <!-- Carousel
+                ================================================== -->
+                    <div id="myCarousel2" class="carousel slide">
+                        @Html.Partial("_PromotionProduct", Model.PromotionProducts)
+                        <a class="left carousel-control" href="#myCarousel2" data-slide="prev"><i class="fa fa-chevron-left fa-2x"></i></a>
+                        <a class="right carousel-control" href="#myCarousel2" data-slide="next"><i class="fa fa-chevron-right fa-2x"></i></a>
+
+                    </div><!-- End Carousel -->
+                </div><!-- End Well -->
+            </div>
+        </div>
+        <div class="clearfix"> </div>
+
+        <!-- Văn phòng phẩm -->
+        <div class="products">
+            <h5 class="latest-product">VĂN PHÒNG PHẨM</h5>
+            <a class="view-all" href="@Url.Action("VPP", "ListOfProducts", null)">XEM THÊM<span></span></a>
+        </div>
+        <div class="clearfix"> </div>
+        <div class="container">
+            <div class="row">
+                <div class="well">
+                    <!-- Carousel================================================== -->
+                    <div id="myCarousel4" class="carousel slide">
+                        @Html.Partial("_VPPham", Model.VPPProducts)
+                        <a class="left carousel-control" href="#myCarousel4" data-slide="prev"><i class="fa fa-chevron-left fa-2x"></i></a>
+                        <a class="right carousel-control" href="#myCarousel4" data-slide="next"><i class="fa fa-chevron-right fa-2x"></i></a>
+
+                    </div><!-- End Carousel -->
+                </div><!-- End Well -->
+            </div>
+        </div>
+        <div class="clearfix"> </div>
+
+    </div>
+    <div class="clearfix"> </div>
+
+    <script>
+    $('#myCarousel').carousel({
+        interval: 0
+    });
+    $('#myCarousel1').carousel({
+        interval: 0
+    });
+    $('#myCarousel2').carousel({
+        interval: 0
+    });
+    $('#myCarousel3').carousel({
+        interval: 0
+        });
+    $('#myCarousel4').carousel({
+        interval: 0
+    });
+    </script>
+</div>

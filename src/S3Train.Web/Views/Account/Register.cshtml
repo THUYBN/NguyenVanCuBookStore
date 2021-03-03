@@ -1,0 +1,150 @@
+﻿@model S3Train.Web.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+    <h4 class="text-success">@ViewBag.Message</h4>
+}
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="modal fade" id="exampleModal2">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Đăng ký</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="#" method="post">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-3 col-form-label">Email</label>
+                                <div class="col-sm-9">
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger", @require = "" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 col-form-label">Mật khẩu</label>
+                                <div class="col-sm-9">
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger", @require = "" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 col-form-label">Xác nhận mật khẩu</label>
+                                <div class="col-sm-9">
+                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger", @require = "" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 col-form-label">Họ tên</label>
+                                <div class="col-md-9">
+                                    @Html.TextBoxFor(m => m.Fullname, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Fullname, "", new { @class = "text-danger", @require = "" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 col-form-label">Giới tính</label>
+                                &nbsp;&nbsp;&nbsp;&nbsp; Nam @Html.RadioButtonFor(m => m.Gender, "Nam", new { @checked = "checked" })
+                                &nbsp;&nbsp;&nbsp;&nbsp; Nữ @Html.RadioButtonFor(m => m.Gender, "Nữ")
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 col-form-label">Số điện thoại</label>
+                                <div class="col-md-9">
+                                    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger", @require = "" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 col-form-label">Ngày sinh</label>
+                                <div class="col-md-9">
+                                    @Html.EditorFor(m => m.DateOfBirth, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.DateOfBirth, "", new { @class = "text-danger", @require = "" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 col-form-label">Quốc gia</label>
+                                <div class="col-md-9">
+                                    @Html.TextBoxFor(m => m.QuocGia, new { @class = "form-control" })
+                                    @*@Html.DropDownListFor(model => model.QuocGia, ViewBag.QuocGia as SelectList, "---Chọn Quốc gia---", htmlAttributes: new { @class = "form-control" })*@
+                                    @Html.ValidationMessageFor(m => m.QuocGia, "", new { @class = "text-danger", @require = "" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 col-form-label">Thành phố/Tỉnh</label>
+                                <div class="col-md-9">
+                                    @Html.TextBoxFor(m => m.ThanhPho, new { @class = "form-control" })
+                                    @*@Html.DropDownListFor(m => m.ThanhPho, new SelectList(""), "---Chọn Quận/Huyện---", new { @class = "form-control" })*@
+                                    @Html.ValidationMessageFor(m => m.ThanhPho, "", new { @class = "text-danger", @require = "" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 col-form-label">Quận/Huyện</label>
+                                <div class="col-md-9">
+                                    @Html.TextBoxFor(m => m.Quan, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Quan, "", new { @class = "text-danger", @require = "" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 col-form-label">Phường/Xã</label>
+                                <div class="col-md-9">
+                                    @Html.TextBoxFor(m => m.Phuong, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Phuong, "", new { @class = "text-danger", @require = "" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 col-form-label">Địa chỉ</label>
+                                <div class="col-md-9">
+                                    @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger", @require = "" })
+                                </div>
+                            </div>
+                            <div class="right-w3l">
+                                <input type="submit" class="form-control" value="Đăng ký">
+                            </div>
+                        </div>
+                        @*<div class="sub-w3l">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <input type="checkbox" class="custom-control-input" id="customControlAutosizing2">
+                                    <label class="custom-control-label" for="customControlAutosizing2">I Accept to the Terms & Conditions</label>
+                                </div>
+                            </div>*@
+                        <div class="txt1 text-center p-t-54 p-b-20">
+                            Hoặc đăng kí với
+                        </div>
+
+                        <div class="flex-c-m">
+                            <a href="#" class="login100-social-item bg1">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+
+                            <a href="#" class="login100-social-item bg3">
+                                <i class="fa fa-google"></i>
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script src="~/Content/js/jquery-1.11.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#QuocGia").change(function () {
+            $.get("/Account/GetListHS", { QuocGia: $("#QuocGia").val() }, function (data) {
+                $("#ThanhPho").empty();
+                $.each(data, function (SignUp, row) {
+                    $("#ThanhPho").append("<option value='" + row.Name + "'>" + row.Name + "</option>")
+                })
+            });
+        })
+    });
+</script>

@@ -1,0 +1,89 @@
+﻿@using S3Train.Web.Models;
+@model PayMentViewModel
+
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="Payment">
+        <div class="info ">
+            <p>Thông tin giao hàng</p>
+            <span>Người nhận: </span><span>@Model.User.HoTen</span><br />
+            <span>Số điện thoại: </span><span>@Model.User.PhoneNumber</span><br />
+            <span>Địa chỉ nhận hàng:</span><span>@Model.User.DiaChi, @Model.User.Phuong, @Model.User.Quan, @Model.User.ThanhPho</span><br /><br />
+            <a href="@Url.Action("AddAddress", "Cart")" class="btn btn-warning btn-sm">Thay đổi</a>
+        </div>
+        <div>
+
+        </div><br />
+        <div class="order-pro">
+            <table>
+                <tr>
+                    <th>Sản phẩm</th>
+                    <th></th>
+                    <th>Gía</th>
+                    <th>Số lượng</th>
+                    <th>Thành tiền</th>
+                </tr>
+                @foreach (var item in Model.Cart)
+                {
+                    <tr>
+                        <td><img src="@Url.Content("~/ImagePD/" + item.Products.HinhAnh)" /></td>
+                        <td>@item.Products.TenSP</td>
+                        <td>@item.Quantity</td>
+                        <td>@item.Products.Gia</td>
+                        <td>@(item.Products.Gia * item.Quantity) </td>
+
+                    </tr>
+                }
+            </table>
+        </div><br />
+        <div class="col-md-6">
+            <p>Ghi chú: <textarea id="note" class ="form-control"type="text" name="txtNote" value=""></textarea></p>
+
+        </div><br /><br /><br /><br /><br />
+        <h3 style="color:orange">Qúy khách vui lòng chọn một trong các hình thức thanh toán dưới đây</h3>
+        <p><input type="radio" id="rdoCash" name="payment" />&nbsp;&nbsp;Thanh toán bằng tiền mặt</p><br />
+        <p><input type="radio"  id="rdobank" name="payment"/>&nbsp;&nbsp;Thanh toán bằng Onepay</p>
+
+        <div class="order-total">
+
+            @{
+                if (@Model.Cart.Sum(m => m.Quantity * m.Products.Gia) >= 20000)
+                {
+                    <h5>Tổng tiền: @Model.Cart.Sum(m => m.Quantity * m.Products.Gia)</h5>
+                    <h5>Phí vận chuyển: 0</h5>
+                    <h5>Tổng tiền phải trả: @Model.Cart.Sum(m => m.Quantity * m.Products.Gia)</h5>
+                }
+                else
+                {
+                    <h5>Tổng tiền: @Model.Cart.Sum(m => m.Quantity * m.Products.Gia)</h5>
+                    <h5>Phí vận chuyển: 30000</h5>
+                    <h5>Tổng tiền phải trả: @Model.Cart.Sum(m => m.Quantity * m.Products.Gia + 30000)</h5>
+                }
+            }  <a id="order-btn" href="@Url.Action("Order", "Manage")" onclick="myFunction()">Thanh toán</a>
+            <div id="snackbar">You have successfully placed an order.thanks!</div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#order-btn').click(function () {
+            var ptt = "";
+            if ($("#rdoCash").is(":checked")) ptt = "Tiền mặt";
+            if ($("#rdobank").is(":checked")) ptt = "Onepay";
+            var note = $("#note").val()
+            $.ajax({
+                type: "Get",
+                url: '/Cart/Order',
+                data: { Note: note, PhuongThuc: ptt },
+                dateType: "text",
+                success: function (data) {
+                    cal();
+                    window.location.href = data.ketqua;
+                    }
+            });
+        });
+    });
+</script>

@@ -1,0 +1,82 @@
+﻿@model S3Train.Domain.ApplicationUser
+@{
+    ViewBag.Title = "AddAddress";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="container">
+        <h2>Thay đổi địa chỉ</h2>
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.Email)
+            @Html.HiddenFor(model => model.PasswordHash)
+            @Html.HiddenFor(model => model.EmailConfirmed)
+            @Html.HiddenFor(model => model.SecurityStamp)
+            @Html.HiddenFor(model => model.PhoneNumberConfirmed)
+            @Html.HiddenFor(model => model.TwoFactorEnabled)
+            @Html.HiddenFor(model => model.LockoutEndDateUtc)
+            @Html.HiddenFor(model => model.LockoutEnabled)
+            @Html.HiddenFor(model => model.AccessFailedCount)
+            @Html.HiddenFor(model => model.UserName)
+            @Html.HiddenFor(model => model.NgaySinh)
+            @Html.HiddenFor(model => model.GioiTinh)
+            @Html.HiddenFor(model => model.QuocGia)
+            @Html.HiddenFor(model => model.TrangThai)
+
+            <div class="form-group">
+                @Html.Label("Họ tên", new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.HoTen, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Số điện thoại", new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Địa chỉ", new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.DiaChi, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Phường/Xã", new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.Phuong, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Quận/Huyện", new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.Quan, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Thành phố/Tỉnh", new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.ThanhPho, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Lưu" class="btn btn-secondary" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

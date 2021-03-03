@@ -1,0 +1,139 @@
+﻿@using S3Train.Web.Models;
+@using Microsoft.AspNet.Identity;
+@model HomeViewModel
+@{
+    /**/
+
+    ViewBag.Title = "Purchase";
+    Layout = "~/Views/Shared/_Profile.cshtml";
+    var ApplicationUserId = User.Identity.GetUserId();
+}
+
+@if (Model.OrderProViewModel == null || Model.OrderProViewModel.Count == 0)
+{
+    <div class="cart-empty">
+        <p>Chưa có đơn hàng nào</p>
+        <a class="continue" href="@Url.Action("Index", "Home", null)">Mua Ngay</a>
+    </div>
+}
+else
+{
+
+        <h2 class="text-danger">Đơn hàng của tôi</h2>
+        <hr />
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    Mã đơn
+                </th>
+                <th>
+                    Ngày mua
+                </th>
+                <th>
+                    Người nhận
+                </th>
+                <th>
+                    Tổng tiền
+                </th>
+                <th>
+                    Trạng thái
+                </th>
+                <th>
+                    Ghi chú
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.OrderProViewModel)
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatedDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalMoney)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Note)
+                        </td>
+                        <td>
+                            <a style="float:right; background-color:coral; color:white" href="@Url.Action("Purchase", "Manage", new { @Id = item.Id })" class="btn btn-default" role="button">Chi tiết</a>
+                        </td>
+                    </tr>
+                }
+            
+            </table>
+    
+    if (ViewBag.TotalPage > 1)
+    {
+        var pageDisplay = (int)ViewBag.MaxPage;
+        int totalPage = (int)ViewBag.TotalPage;
+        int curentPage = ((int)ViewBag.Page);
+
+        var startPageIndex = Math.Max(1, curentPage - pageDisplay / 2);
+        var endPageIndex = Math.Min(totalPage, curentPage + pageDisplay / 2);
+        var link = Url.Action("Order", "Manage");
+        <nav>
+            <ul class="pagination" style="text-align:center">
+                @if (curentPage > ViewBag.First)
+                {
+                    <li><a href="@link&page=@ViewBag.First" title="First page"><i class="fa fa-angle-double-left"></i></a></li>
+                    <li><a href="@link&page=@ViewBag.Pre" title="Previous page"><i class="fa fa-angle-left"></i></a></li>
+                }
+                @for (int i = startPageIndex; i <= endPageIndex; i++)
+                {
+                    if (curentPage == i)
+                    {
+                        <li><a href="@link?page=@i" class="active" title="Page @i">@i</a></li>
+                    }
+                    else
+                    {
+                        <li><a href="@link?page=@i" class="pos" title="Page @i">@i</a></li>
+                    }
+                }
+                @if (curentPage < totalPage)
+                {
+                    <li><a href="@link?page=@ViewBag.Next" title="Next page"><i class="fa fa-angle-right"></i></a></li>
+                    <li><a href="@link?page=@ViewBag.Last" title="Last page"><i class="fa fa-angle-double-right"></i></a></li>
+                }
+            </ul>
+        </nav>
+    }
+    else
+    {
+        <nav>
+            <ul class="pagination">
+                <li><a href="@Url.Action("Order", "Manage")?page=1" class="active" title="Page 1">1</a></li>
+            </ul>
+        </nav>
+    }
+}
+<style>
+    .total {
+        float: right
+    }
+
+    .price {
+        float: right
+    }
+
+    nav ul.pagination {
+        float: right;
+    }
+
+    .sta {
+        margin-left: -800px;
+    }
+</style>
+
+
+

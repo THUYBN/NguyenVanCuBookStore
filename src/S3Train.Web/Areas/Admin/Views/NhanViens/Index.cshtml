@@ -1,0 +1,134 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.PagedList<S3Train.Domain.NhanVien>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/NV.cshtml";
+}
+
+<h2>Danh sách Nhân viên</h2>
+
+<p class="btn btn-success mb-1">
+    @Html.ActionLink("Thêm mới nhân viên", "Create")
+</p>
+<br />
+<br />
+@using (Html.BeginForm("Index", "NhanViens", FormMethod.Get))
+{
+    @Html.TextBox("search")
+    <input type="submit" style="color:white" value="Tìm Kiếm">
+}
+@using (Html.BeginForm("Index", "NhanViens", FormMethod.Get))
+{
+    
+    <table class="table table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <th>
+                    Ảnh
+                </th>
+                <th>
+                    Tên
+                </th>
+                <th>
+                    Địa chỉ
+                </th>
+                <th>
+                    Phái
+                </th>
+                <th>
+                    Ngày sinh
+                </th>
+                <th>
+                    SĐT
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    CMND
+                </th>
+                <th>
+                    Trạng thái
+                </th>
+                <th>
+                    Tên ĐN
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@Url.Content("~/ImagePD/" + item.HinhAnh)" width="50" height="50" />
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenNV)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiaChi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GioiTinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgaySinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SDT)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CMND)
+                </td>
+                <td>
+                    @(item.TrangThai ? "Đang làm" : "Nghỉ việc")
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenDN)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", "NhanViens", new { id = item.Id })" class="btn btn-warning btn-sm"><i class="fas fa-pen" aria-hidden="true"></i></a>
+                    @*<a href="@Url.Action("Details", "SanPhams", new { id = item.Id })" class="btn btn-info btn-sm"><i class="fas fa-info-circle" aria-hidden="true"></i></a>*@
+                    <a href="@Url.Action("Delete", "NhanViens", new { id = item.Id })" class="btn btn-danger btn-sm"><i class="fas fa-trash" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+
+    @*Create page link*@
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    <div class="MenuPage">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+    </div>
+    <style>
+        .MenuPage li {
+            display: inline;
+        }
+    </style>
+
+    @*<script>
+            $(document).ready(function () {
+                $('#search').click(function () {
+                    var search = $("#search").val()
+                    $.ajax({
+                        type: "Get",
+                        url: '/NhanViens/Index',
+                        data: { search: search },
+                        dateType: "text",
+                        success: function (data) {
+                            cal();
+                            //window.location.href= data;
+                        }
+                    });
+                });
+            });
+        </script>*@

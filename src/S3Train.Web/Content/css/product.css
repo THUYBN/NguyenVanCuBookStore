@@ -1,0 +1,78 @@
+﻿
+.well {
+   
+}
+#myCarousel .thumbnail {
+    margin-bottom: 0;
+    height: 400px;
+}
+
+#myCarousel img {
+    width: 225px;
+    height: 260px;
+}
+
+
+#myCarousel h5 {
+    width: 220px;
+    height:50px;
+    margin-left:2px;
+    color:black;
+}
+#myCarousel a:hover {
+    text-decoration: none;
+}
+#myCarousel1 .thumbnail {
+    margin-bottom: 0;
+    height: 400px;
+}
+
+#myCarousel1 img {
+    width: 225px;
+    height: 260px;
+}
+
+
+#myCarousel1 h5 {
+    width: 220px;
+    height: 50px;
+    margin-left: 2px;
+}
+
+
+#myCarousel2 .thumbnail {
+    margin-bottom: 0;
+    height: 400px;
+}
+
+#myCarousel2 img {
+    width: 225px;
+    height: 260px;
+}
+
+
+#myCarousel2 h5 {
+    width: 220px;
+    height: 50px;
+    margin-left: 2px;
+}
+.carousel-control.left, .carousel-control.right {
+    background-image: none !important;
+    color: #fff;
+    top: 45%;
+    color: #428BCA;
+    bottom: auto;
+    padding-top: 4px;
+    width: 30px;
+    height: 30px;
+    text-shadow: none;
+    opacity: 1;
+}
+
+    .carousel-control.left:hover {
+        color: #d9534f;
+    }
+
+    .carousel-control.right:hover {
+        color: #d9534f;
+    }

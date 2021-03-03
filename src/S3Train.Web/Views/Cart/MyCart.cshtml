@@ -1,0 +1,208 @@
+﻿@using S3Train.Web.Models;
+@using Microsoft.AspNet.Identity;
+@model IList<CartViewModel>
+@{
+    ViewBag.Title = "MyCart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model == null || Model.Count == 0)
+{
+    <div class="cart-empty">
+    <p>Giỏ hàng trống!</p>
+    <a class="continue" href="@Url.Action("Index", "Home", null)">Mua Ngay</a>
+    </div>
+}
+else
+{
+    <div class="container" id="cart-wrapper">
+        <div class="col-md-9 cart-items">
+            <h2>Giỏ hàng (<span id="totalQty"></span>)</h2>
+           
+            @foreach (var item in Model.Select((value, i) => new { i, value }))
+            {
+                <div class="cart-header">
+                    <div class="close1" data-prod-id="@item.value.Products.Id"> </div>
+                    <div class="cart-sec">
+
+                        <divError executing child request  class="cart-item cyc">
+                            <img src="@Url.Content("~/ImagePD/"+item.value.Products.HinhAnh)" width="100" height="150" />
+                        </divError>
+                        @if (item.value.PromotionPercent > 0)
+                        {
+                            <div class="cart-item-info">
+                                <h3>@item.value.Products.TenSP</h3>
+                                <h4> @(Convert.ToDouble(item.value.Products.Gia) - (Convert.ToDouble(item.value.Products.Gia) * item.value.PromotionPercent / 100))</h4>
+                                <p class="qty">Số lượng:</p>
+                                <input min="1" max="@item.value.Products.SoLuong" type="number" id="quantity" name="quantity" data-id="@item.value.Products.Id" value="@item.value.Quantity" class="form-control1 input-small quantity">
+                                <input class="price" value="@item.value.Products.Gia" type="hidden" />
+                                <input class="amount" value="@item.value.Products.SoLuong" type="hidden" />
+                                <input class="percent" value="@item.value.PromotionPercent" type="hidden" />
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="delivery">
+                                <p>Thành tiền:</p>
+                                <p class="sum-money"></p>
+                                <div class="clearfix"></div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="cart-item-info">
+                                <h3>@item.value.Products.TenSP</h3>
+                                <h4>@item.value.Products.Gia</h4>
+                                <p class="qty">Số lượng:</p>
+                                <input min="1" max="@item.value.Products.SoLuong" type="number" id="quantity" name="quantity" data-id="@item.value.Products.Id" value="@item.value.Quantity" class="form-control1 input-small quantity">
+                                <input class="price" value="@item.value.Products.Gia" type="hidden" />
+                                <input class="amount" value="@item.value.Products.SoLuong" type="hidden" />
+                                <input class="percent" value="@item.value.PromotionPercent" type="hidden" />
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="delivery">
+                                <p>Thành tiền: </p>
+                                <p class="sum-money"></p>
+                                <div class="clearfix"></div>
+                            </div>
+                            }
+
+                    </div>
+                </div>
+            }
+
+        </div>
+      
+            <div class="col-md-3 cart-total">
+                <a class="continue" href="@Url.Action("Index", "Home", null)">Tiếp tục mua hàng</a>
+                <div class="price-details">
+                    <span>Thành tiền</span>
+                    <span id="card-among"></span>
+                    <span>Giảm giá</span>
+                    <span class="total">---</span>
+                    <span>Phí vận chuyển</span>
+                    <span id="ship-fee"></span>
+                    <div class="clearfix"></div>
+                </div>
+                <h4 class="last-price">Tổng tiền</h4>
+                <span class="total final">$</span>
+                <div class="clearfix"></div>
+                @if (User.Identity.GetUserId() == null)
+                {
+                    <a class="order" href="@Url.Action("SignIn", "Account", null)" onclick="alert('Vui lòng đăng nhập để thanh toán')">Thanh toán</a>
+                }
+                else
+                {
+                    <a class="order" href="@Url.Action("PayMent","Cart", null)">Thanh toán</a>
+                }
+                
+            </div>
+      
+        </div>
+
+        <div hidden id="cart-wrapper-empty">
+            <p>Giỏ hàng trống!</p>
+            <a class="continue" href="@Url.Action("Index", "Home", null)">Mua Ngay</a>
+        </div>
+}
+<script>
+    $(document).ready(function () {
+    cal();
+    });
+    $(".quantity").change(function () {
+        debugger
+        $(".cart-item-info").each(function () {
+            var quan = $(".quantity");
+            var amou = $(".amount");
+            var quantityVal = parseInt($(this).find(quan).val());
+            var amountVal = parseInt($(this).find(amou).val());
+            if (quantityVal >= amountVal) {
+                alert("The quantity is not enough");
+                $(this).find(quan).val(amountVal);
+            }
+        });
+        $.ajax({
+            data: { Id: $(this).data("id"), NewQuan: $(this).val() },
+            url: "/Cart/UpdateQuantity",
+            type: "POST",
+            success: function (data) {
+                cal();
+            }
+        });
+    });
+    function quantity()
+    {
+        $(".quantity").each(function () {
+
+        });
+    }
+    function cal() {
+        var among = 0;
+        var totalQty = 0;
+        var total = 0;
+        var fee = 30000;
+        $(".cart-item-info").each(function () {
+            var price = $(".price");
+            var quantity = $(".quantity");
+            var percent = $(".percent");
+
+            var priceVal = $(this).find(price).val();
+            var quantityVal = parseInt($(this).find(quantity).val());
+            var percentVal = parseInt($(this).find(percent).val());
+            if (percentVal > 0)
+            {
+                total = Math.round((priceVal * quantityVal) - (total = priceVal * quantityVal * percentVal / 100));
+            }
+            else
+            {
+                total = priceVal * quantityVal;
+            }
+            
+            totalQty = Math.round(totalQty + quantityVal);
+            among += Math.round(total);
+           
+            if (among  < 20000) {
+                $("#ship-fee").html(fee)
+                $(".final").html(among + fee);
+            }
+            else {
+                $("#ship-fee").html(fee - 30000)
+                $(".final").html(among);
+            }
+           
+            $(this).parent().find(".sum-money").html(total)
+            
+           
+        });
+        
+
+        $("#card-among").html(among);
+        $("#totalQty").html(totalQty);
+    };
+
+    $('.close1').on('click', function () {
+        var _this = $(this);
+        var r = confirm("Are you sure you want to leave this product?");
+        if (r == true) {
+            $.ajax({
+                data: { Id: $(this).data("prod-id") },
+                url: "/Cart/removeItem",
+                type: "POST",
+                success: function (data) {
+                    //delete product item in cart
+                    _this.parent().remove();
+                    cal();
+
+                    if (data.length == 0) {
+                        $("#cart-wrapper").css("display", "none")
+                        $("#cart-wrapper-empty").css("display", "block")
+                    }
+                    else {
+                        $("#cart-wrapper").css("display", "block")
+                        $("#cart-wrapper-empty").css("display", "none")
+                    }
+                }
+
+            });
+        }
+
+    });
+</script>

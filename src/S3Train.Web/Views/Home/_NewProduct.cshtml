@@ -1,0 +1,62 @@
+﻿@using S3Train.Web.Models;
+@model IEnumerable<IGrouping<int, ProductViewModel>>
+@{
+    ViewBag.Title = "_NewProduct";
+}
+<div class="carousel-inner">
+    @{
+        foreach (var group in Model)
+        {
+            var activeClass = group.Key == 0 ? "active" : string.Empty;
+            <div class="item @activeClass">
+                <div class="row">
+                    @foreach (var item in group)
+                    {
+
+                        <div class="col-md-3">
+                            <div class="thumbnail">
+
+                                <a href="@Url.Action("Detail", "Product",new { @id = item.Id} )">
+                                    <img src="@Url.Content("~/ImagePD/"+item.ImagePath)" />
+                                </a>
+                                <div class="caption">
+                                    <a href="@Url.Action("Detail", "Product",new { @id = item.Id} )"><h5>@item.NameProduct</h5></a>
+                                    <p><a class="btn btn-primary" role="button">@item.DisplayPrice</a><a id="btn-add-to-cart" data-id="@item.Id" style="float:right"  class="btn btn-default" role="button" onclick="myFunction()">Thêm vào giỏ hàng</a></p>
+                                    <div id="snackbar">Add to cart successfully</div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    }
+
+                </div>
+            </div>
+        }
+    }
+
+</div>
+<script>
+    $(document).ready(function () {
+        $('.btn-default').click(function () {
+            var id = $(this).data("id");
+            $.ajax({
+                type: "POST",
+                url: '/Cart/AddItems',
+                data: { Id: id },
+                success: function (data) {
+                }
+            });
+        });
+    });
+    function myFunction() {
+      // Get the snackbar DIV
+      var x = document.getElementById("snackbar");
+
+      // Add the "show" class to DIV
+      x.className = "show";
+
+      // After 3 seconds, remove the show class from DIV
+        setTimeout(function () { x.className = x.className.replace("show", ""); }, 5000);
+    }
+</script>

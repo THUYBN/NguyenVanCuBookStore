@@ -1,0 +1,118 @@
+﻿@using S3Train.Web.Models;
+@model HomeViewModel
+@{
+    ViewBag.Title = "bestSellerProducts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="shop">
+    <div class="container">
+        <div class="roses-head">
+            <h2>SÁCH BÁN CHẠY</h2>
+        </div>
+    </div>
+</div>
+<!---->
+<div class="container">
+    <div id="myCarousel" class="carousel slide">
+        @foreach (var item in Model.bestSellerProducts)
+        {
+
+            <div class="col-md-3">
+                <div class="thumbnail">
+
+                    <a href="@Url.Action("Detail", "Product",new { @id = item.Id} )">
+                        <img src="@Url.Content("~/ImagePD/"+item.ImagePath)" />
+                    </a>
+                    <div class="caption">
+                        <a href="@Url.Action("Detail", "Product",new { @id = item.Id } )"><h5>@item.NameProduct</h5></a>
+                        <p>
+                        <a class="btn btn-primary" role="button">@(Convert.ToDouble(item.Price) - (Convert.ToDouble(item.Price) * item.PromotionPercent / 100))</a>
+                        <a id="btn-add-to-cart" data-id="@item.Id" style="float:right" onclick="myFunction()" class="btn btn-default" role="button">Thêm vào giỏ hàng</a></p>
+                        <div id="snackbar">Add to cart successfully</div>
+                    </div>
+
+                </div>
+            </div>
+        }
+
+        <div class="clearfix"></div>
+        <!------Page List-------->
+        @if (ViewBag.TotalPage > 1)
+        {
+            var pageDisplay = (int)ViewBag.MaxPage;
+            int totalPage = (int)ViewBag.TotalPage;
+            int curentPage = ((int)ViewBag.Page);
+
+            var startPageIndex = Math.Max(curentPage, curentPage - pageDisplay / 2);
+            var endPageIndex = Math.Min(totalPage, curentPage + pageDisplay / 2);
+            var link = Url.Action("bestSellerProducts", "ListOfProducts");
+            <nav>
+                <ul class="pagination" style="text-align:center">
+                    @if (curentPage > ViewBag.First)
+                    {
+                        <li><a href="@link?page=@ViewBag.First" title="First page"><i class="fa fa-angle-double-left"></i></a></li>
+                        <li><a href="@link?page=@ViewBag.Pre" title="Previous page"><i class="fa fa-angle-left"></i></a></li>
+                    }
+                    @for (int i = startPageIndex; i <= endPageIndex; i++)
+                    {
+                        if (curentPage == i)
+                        {
+                            <li><a href="@link?page=@i" class="active" title="Page @i">@i</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="@link?page=@i" class="pos" title="Page @i">@i</a></li>
+                        }
+                    }
+                    @if (curentPage < totalPage)
+                    {
+                        <li><a href="@link?page=@ViewBag.Next" title="Next page"><i class="fa fa-angle-right"></i></a></li>
+                            <li><a href="@link?page=@ViewBag.Last" title="Last page"><i class="fa fa-angle-double-right"></i></a></li>
+                    }
+                </ul>
+            </nav>
+        }
+        else
+        {
+            <nav>
+                <ul class="pagination">
+                    <li><a href="@Url.Action("bestSellerProducts", "ListOfProducts")?page=1" class="active" title="Page 1">1</a></li>
+                </ul>
+            </nav>
+        }
+
+    </div>
+
+</div>
+
+<style>
+    nav ul.pagination {
+        float: right;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        $('.btn-default').click(function () {
+            var id = $(this).data("id");
+            $.ajax({
+                type: "POST",
+                url: '/Cart/AddItems',
+                data: { Id: id },
+                success: function (data) {
+                }
+            });
+        });
+    });
+    function myFunction() {
+      // Get the snackbar DIV
+      var x = document.getElementById("snackbar");
+
+      // Add the "show" class to DIV
+      x.className = "show";
+
+      // After 3 seconds, remove the show class from DIV
+        setTimeout(function () { x.className = x.className.replace("show", ""); }, 5000);
+    }
+</script>

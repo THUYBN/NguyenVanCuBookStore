@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ASPSMS</name>
+    </assembly>
+    <members>
+        <member name="M:ASPSMS.SMS.AddRecipient(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="PhoneNumber"></param>
+            <param name="TransactionReferenceNumber"></param>
+        </member>
+        <member name="M:ASPSMS.SMS.AddRecipientEx(System.String,System.String,System.String,System.Nullable{System.DateTime})">
+            <summary>
+            
+            </summary>
+            <param name="PhoneNumber"></param>
+            <param name="TransactionReferenceNumber"></param>
+            <param name="MessageData"></param>
+            <param name="DeferredDeliveryTime"></param>
+        </member>
+        <member name="M:ASPSMS.SMS.AddTransRefNumberForNotificationInquiry(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="sTransactionReferenceNumber"></param>
+        </member>
+        <member name="M:ASPSMS.SMS.CheckOriginatorAuthorization">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ASPSMS.SMS.DeleteAllRecipients">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ASPSMS.SMS.SendBinaryData">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ASPSMS.SMS.SendOriginatorUnlockCode">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ASPSMS.SMS.SendTextSMS">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ASPSMS.SMS.SendVCard">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ASPSMS.SMS.SendWAPPushSMS">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ASPSMS.SMS.UnlockOriginator">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ASPSMS.SMS.SendAllDataAsync(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="sMethod"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

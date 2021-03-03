@@ -1,0 +1,187 @@
+﻿/*.order-form{
+    padding: 4em 0;
+}
+
+
+.reg {
+    margin-top: 2em;
+}
+
+.log {
+    margin: 2em 0 0em 0;
+    padding: 0;
+}
+
+.order-form h2, .login h2 {
+    color: #3C3B3B;
+    font-weight: 600;
+    font-size: 2em;
+    text-transform: uppercase;
+    font-family: 'Raleway', sans-serif;
+}
+
+.reg p, .log p {
+    color: #999;
+    font-size: 1em;
+    line-height: 1.8em;
+}
+
+.reg form {
+    margin-top: 1em;
+}
+
+.reg ul li {
+    display: inline-block;
+    margin: 7px 0;
+    width: 72%;
+}
+
+    .reg ul li.text-info {
+        width: 27%;
+        color: #5d5959;
+    }
+
+.reg form input[type="text"], .reg form input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    font-size: 1em;
+    font-weight: 400;
+    border: 1px solid #D6D6D6;
+    outline: none;
+    color: #5d5959;
+}
+
+.reg-form {
+    padding-left: 0;
+}
+
+.reg form input[type="submit"] {
+    width: 80%;
+    margin: 0 auto;
+    display: block;
+    padding: 8px;
+    font-size: 1.2em;
+    font-weight: 400;
+    border: 1.5px solid #ef8743;
+    color: #fff;
+    border-radius: 5px;
+    outline: none;
+    background: #ef8743;
+    margin-top: 1em;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+}
+
+    .reg form input[type="submit"]:hover {
+        border: 1.5px solid #333;
+        background: transparent;
+        color: #333;
+    }
+
+p.click {
+    color: #999;
+    font-size: 0.9em;
+    line-height: 1.8em;
+    width: 58%;
+    margin: 15px auto;
+    text-align: center;
+}
+
+    p.click a {
+        color: #1a1818;
+    }
+
+.reg-right {
+    padding: 2em 0 0 3em;
+}
+
+    .reg-right h3 {
+        color: #ef8743;
+        font-size: 1.3em;
+        margin-bottom: 0.5em;
+        font-family: 'Raleway', sans-serif;
+    }
+
+h3.lorem {
+    margin-top: 2em;
+}
+
+.reg-right p {
+    color: #999;
+    font-size: 1em;
+    line-height: 1.8em;
+}
+
+.login-right input[type="text"] {
+    border: 1px solid #EEE;
+    outline-color: #3498db;
+    width: 96%;
+    font-size: 0.8125em;
+    padding: 0.5em;
+}
+
+.log p span {
+    display: inline-block;
+    cursor: pointer;
+    color: #1a1818;
+    text-decoration: underline;
+}
+
+.log h5 {
+    color: #5d5959;
+    font-size: 1.3em;
+    padding-bottom: 10px;
+}
+
+.log form {
+    margin-top: 2em;
+}
+
+    .log form input[type="text"], .log form input[type="password"] {
+        width: 70%;
+        padding: 8px;
+        font-size: 1em;
+        font-weight: 400;
+        border: 1px solid #D6D6D6;
+        outline: none;
+        color: #5d5959;
+        margin-bottom: 2em;
+    }
+
+    .log form input[type="submit"] {
+        width: 20%;
+        display: block;
+        padding: 8px;
+        font-size: 1.2em;
+        font-weight: 400;
+        border: none;
+        color: #fff;
+        border-radius: 5px;
+        outline: none;
+        background: #ef8743;
+        margin-bottom: 0.5em;
+        border: 1px solid #ef8743;
+        transition: 0.5s all;
+        -webkit-transition: 0.5s all;
+        -moz-transition: 0.5s all;
+        -o-transition: 0.5s all;
+        -ms-transition: 0.5s all;
+    }
+
+        .log form input[type="submit"]:hover {
+            background: transparent;
+            color: #333;
+            border: 1px solid #333;
+        }
+
+.log a {
+    display: block;
+    text-decoration: underline;
+    margin-right: 2em;
+    font-size: 1.1em;
+    font-weight: 400;
+    color: #7b7a7a;
+}*/
+

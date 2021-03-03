@@ -1,0 +1,78 @@
+﻿ <!---->
+<div class="footer">
+    <div class="footer-top">
+        <div class="container">
+            <div class="latter">
+                <h6>NEWS-LETTER</h6>
+                <div class="sub-left-right">
+                    <form>
+                        <input type="text" value="Enter email here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter email here';}" />
+                        <input type="submit" value="SUBSCRIBE" />
+                    </form>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+            <div class="latter-right">
+                <p>FOLLOW US</p>
+                <ul class="face-in-to">
+
+                    <li><a href="https://www.facebook.com/HETHONGNHASACHNGUYENVANCU"><span class="facebook-in"> </span></a></li>
+
+                </ul>
+
+                <div class="clearfix"> </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="footer-bottom-cate">
+                <img src="~/Content/images/loga.jpg" width="250px"/>
+                <ul>
+                    <li>
+
+
+                        Hệ thống Nhà sách Nguyễn Văn Cừ<br />
+                        Công Ty TNHH Một Thành Viên In <br />Thành Nghĩa Thành Phố Hồ Chí Minh<br />
+                        VPĐD: 356 Lê Quang Sung, P. 6, Q. 6, TP. HCM<br />
+                        
+
+
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-bottom-cate">
+                <h5>HỖ TRỢ</h5>
+                <ul>
+                    <li>Email: online@nhasachnguyenvancu.vn</li>
+                    <li>Hotline: 028 7108 6979</li>
+                </ul>
+            </div>
+            <div class="footer-bottom-cate">
+                <h5>Tài khoản</h5>
+                @using Microsoft.AspNet.Identity
+                @if (Request.IsAuthenticated)
+                {
+                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm"}))
+                    {
+                        @Html.AntiForgeryToken()
+                        <ul>
+                            <li><a href="javascript:document.getElementById('logoutForm').submit()">Đăng xuất</a></li>
+                            <li><a href="@Url.Action("AddAddress", "Manage")">Thay đổi địa chỉ</a></li>
+                            <li><a href="@Url.Action("Order", "Manage")">Đơn hàng của bạn</a></li>
+                        </ul>
+                    }
+                }
+                else
+                {
+                    <ul>
+                         <li><a href="@Url.Action("SignIn", "Account")">Đăng nhập/Đăng kí </a></li>
+                    </ul>
+                }
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+<script>var div = document.createElement('div'); div.className = 'fb-customerchat'; div.setAttribute('page_id', '100305822047763'); div.setAttribute('ref', 'b64:Y2hhdA=='); document.body.appendChild(div); window.fbMessengerPlugins = window.fbMessengerPlugins || { init: function () { FB.init({ appId: '1678638095724206', autoLogAppEvents: true, xfbml: true, version: 'v8.0' }); }, callable: [] }; window.fbAsyncInit = window.fbAsyncInit || function () { window.fbMessengerPlugins.callable.forEach(function (item) { item(); }); window.fbMessengerPlugins.init(); }; setTimeout(function () { (function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) { return; } js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/en_US/sdk/xfbml.customerchat.js"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk')); }, 0);</script>

@@ -1,0 +1,39 @@
+﻿@using S3Train.Web.Models;
+@model IEnumerable<IGrouping<int, CSProductViewModel>>
+@{
+    ViewBag.Title = "_CSProduct";
+}
+
+<div class="carousel-inner">
+    @{
+        foreach (var group in Model)
+        {
+            var activeClass = group.Key == 0 ? "active" : string.Empty;
+            <div class="item @activeClass">
+                <div class="row">
+                    @foreach (var item in group)
+                    {
+
+                        <div class="col-md-3">
+                            <div class="thumbnail">
+
+                                <a href="@Url.Action("Detail", "Product",new { @id = item.Id} )">
+                                    <img src="@Url.Content("~/ImagePD/"+item.ImagePath)" />
+                                </a>
+                                <div class="caption">
+                                    <a href="@Url.Action("Detail", "Product",new { @id = item.Id} )"><h5>@item.NameProduct</h5></a>
+                                    <p><a  class="btn btn-primary" role="button">@item.DisplayPrice</a><a id="btn-add-to-cart1" href="@Url.Action("Detail", "Product", new { @id = item.Id })" style="float:right"  class="btn btn-default" role="button">Xem trước</a></p>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    }
+
+                </div>
+            </div>
+        }
+    }
+
+</div>
+

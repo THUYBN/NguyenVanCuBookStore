@@ -1,0 +1,20 @@
+﻿@model S3Train.Domain.NhaSanXuat
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/SP.cshtml";
+}
+
+<h3 style="color:red">Bạn có chắc muốn xóa @Model.TenNSX này?</h3>
+<div>
+    
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger mb-1" /> |
+            @Html.ActionLink("Quay lại ", "Index")
+        </div>
+    }
+</div>
